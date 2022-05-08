@@ -12,3 +12,16 @@ body {
   width: 90%;
   margin: 0 auto;
 }
+
+#game {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.eachCard {
+  border-radius: 5px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 30%;
+}
