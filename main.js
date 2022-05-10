@@ -1,6 +1,6 @@
 'use strict';
 
-const cardsArray = [
+const myCards = [
   {
     name: 'Walter',
     img: './src/img/walter.png'
@@ -51,18 +51,19 @@ const cardsArray = [
   }
 ];
 
-const gameGrid = cardsArray
-  .concat(cardsArray)
+const gameGrid = myCards
+  .concat(myCards)
   .sort(() => 0.5 - Math.random());
 
 let firstGuess = '';
 let secondGuess = '';
 let count = 0;
 let previousTarget = null;
-let delay = 1200;
+let delay = 1000;
 
-const game = document.getElementById('game');
+const game = document.querySelector('#game');
 const grid = document.createElement('section');
+
 grid.setAttribute('class', 'grid');
 game.appendChild(grid);
 
