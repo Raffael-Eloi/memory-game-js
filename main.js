@@ -57,11 +57,15 @@ const gameGrid = myCards
   .concat(myCards)
   .sort(() => 0.5 - Math.random());
 
-let firstGuess = '';
-let secondGuess = '';
+let firstAttempt = '';
+let secondAttempt = '';
 let count = 0;
 let previousTarget = null;
-let delay = 1000;
+const delay = 1000;
+let hits = 0;
+
+const success = document.querySelector('.success-message');
+success.style.display = 'none';
 
 const game = document.querySelector('#game');
 const grid = document.createElement('section');
@@ -96,49 +100,57 @@ const match = () => {
 };
 
 const resetGuesses = () => {
-  firstGuess = '';
-  secondGuess = '';
+  firstAttempt = '';
+  secondAttempt = '';
   count = 0;
   previousTarget = null;
 
-  var selected = document.querySelectorAll('.selected');
+  let selected = document.querySelectorAll('.selected');
   selected.forEach(card => {
     card.classList.remove('selected');
   });
 };
 
-grid.addEventListener('click', event => {
-
-  const clicked = event.target;
-
-  if (
-    clicked.nodeName === 'SECTION' ||
+function isValidated (clicked) {
+  if (clicked.nodeName === 'SECTION' || 
     clicked === previousTarget ||
     clicked.parentNode.classList.contains('selected') ||
-    clicked.parentNode.classList.contains('match')
-  ) {
+    clicked.parentNode.classList.contains('match')) return false;
+  else return true;
+}
+
+function showSuccessMessage() {
+  const song = document.querySelector('#breaking-bad-song');
+  game.style.display = 'none';
+  success.style.display = 'flex';
+  song.play();
+}
+
+grid.addEventListener('click', event => {
+  const clicked = event.target;
+
+  if (!isValidated(clicked)) {
     return;
   }
 
   if (count < 2) {
     count++;
     if (count === 1) {
-      firstGuess = clicked.parentNode.dataset.name;
-      console.log(firstGuess);
+      firstAttempt = clicked.parentNode.dataset.name;
       clicked.parentNode.classList.add('selected');
     } else {
-      secondGuess = clicked.parentNode.dataset.name;
-      console.log(secondGuess);
+      secondAttempt = clicked.parentNode.dataset.name;
       clicked.parentNode.classList.add('selected');
     }
 
-    if (firstGuess && secondGuess) {
-      if (firstGuess === secondGuess) {
+    if (firstAttempt && secondAttempt) {
+      if (firstAttempt === secondAttempt) {
+        hits++;
         setTimeout(match, delay);
+        if (hits === 12) showSuccessMessage();
       }
       setTimeout(resetGuesses, delay);
     }
     previousTarget = clicked;
   }
-
 });
