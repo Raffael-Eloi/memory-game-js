@@ -3,11 +3,18 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 footer {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 20px;
+  padding: 20px;
+  background-color: rgb(4, 14, 4);
 }
 
 .container {

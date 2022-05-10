@@ -12,6 +12,15 @@
 }
 
 @media screen and (min-width: 1400px) {
+  header {
+    margin-bottom: 50px;
+  }
+
+  footer {
+    margin-top: 180px;
+    margin-bottom: 10px;
+  }
+
   .card,
   .back,
   .front {

@@ -51,6 +51,8 @@ const myCards = [
   }
 ];
 
+// You're goddman right
+
 const gameGrid = myCards
   .concat(myCards)
   .sort(() => 0.5 - Math.random());
